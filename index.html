@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>/// CYBER_MATRIX_V1.0 ///</title>
     <style>
-        /* Global Y2K Base Styles */
         body {
             font-family: "Courier New", Courier, monospace;
             background-color: #000000;
@@ -19,31 +18,28 @@
             box-sizing: border-box;
         }
 
-        /* 🎥 Fullscreen YouTube Wrapper Container */
         .video-background-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2; /* Keeps video behind everything */
-            pointer-events: none; /* Prevents users from clicking the video pause buttons */
+            z-index: -2;
+            pointer-events: none;
             overflow: hidden;
         }
 
-        /* Stretches the YouTube iframe to cover the screen */
         .video-background-container iframe {
             width: 100vw;
-            height: 56.25vw; /* Given standard 16:9 ratio */
+            height: 56.25vw;
             min-height: 100vh;
-            min-width: 177.77vh; /* Forces widescreen video scaling */
+            min-width: 177.77vh;
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%); /* Centers the cropped frame */
+            transform: translate(-50%, -50%);
         }
 
-        /* Y2K Scanline & Tint Overlay */
         .video-overlay {
             position: fixed;
             top: 0;
@@ -52,11 +48,10 @@
             height: 100%;
             background: linear-gradient(rgba(255, 0, 0, 0.08) 50%, rgba(0, 0, 0, 0.4) 50%);
             background-size: 100% 4px; 
-            z-index: -1; /* Sits between the video and text content */
+            z-index: -1;
             pointer-events: none;
         }
 
-        /* Retro Title Header */
         h1 {
             color: #ff0000;
             text-transform: uppercase;
@@ -70,7 +65,6 @@
             position: relative;
         }
 
-        /* 3-Column Grid Container */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -80,7 +74,6 @@
             position: relative;
         }
 
-        /* Chunky Beveled Y2K Interface Box */
         .grid-box {
             background-color: rgba(0, 0, 0, 0.85); 
             border: 4px double #ff0000; 
@@ -134,48 +127,35 @@
 </head>
 <body>
 
-    <!-- 🎥 YouTube Background Wrapper -->
     <div class="video-background-container">
-        <!-- Replace YOUR_VIDEO_ID in both spots in the link below -->
-        <iframe src="https://www.youtube.com/watch?v=tzfQOZATvaU" 
-                frameborder="0" 
-                allow="autoplay; encrypted-media" 
-                allowfullscreen>
-        </iframe>
+        <iframe src="https://youtube.com" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
 
-    <!-- Retro CRT Monitor Scanline Tint Layer -->
     <div class="video-overlay"></div>
 
     <h1>[ ENTER_THE_SYSTEM ]</h1>
 
     <div class="grid-container">
-        <!-- Box 1 -->
         <a href="page1.html" class="grid-box">
             <img src="https://picsum.photos" alt="Subpage 01">
             <span>// SUBPAGE_01 //</span>
         </a>
-        <!-- Box 2 -->
         <a href="page2.html" class="grid-box">
             <img src="https://picsum.photos" alt="Subpage 02">
             <span>// SUBPAGE_02 //</span>
         </a>
-        <!-- Box 3 -->
         <a href="page3.html" class="grid-box">
             <img src="https://picsum.photos" alt="Subpage 03">
             <span>// SUBPAGE_03 //</span>
         </a>
-        <!-- Box 4 -->
         <a href="page4.html" class="grid-box">
             <img src="https://picsum.photos" alt="Subpage 04">
             <span>// SUBPAGE_04 //</span>
         </a>
-        <!-- Box 5 -->
         <a href="page5.html" class="grid-box">
             <img src="https://picsum.photos" alt="Subpage 05">
             <span>// SUBPAGE_05 //</span>
         </a>
-        <!-- Box 6 -->
         <a href="page6.html" class="grid-box">
             <img src="https://picsum.photos" alt="Subpage 06">
             <span>// SUBPAGE_06 //</span>
