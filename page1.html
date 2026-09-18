@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>/// SUBPAGE_01 ///</title>
+    <style>
+        body {
+            font-family: "Courier New", Courier, monospace;
+            background-color: #000000;
+            color: #ffffff;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* 🎥 Matching Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        /* Y2K Scanline Overlay */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255, 0, 0, 0.08) 50%, rgba(0, 0, 0, 0.4) 50%);
+            background-size: 100% 4px; 
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Retro Subpage Title */
+        h1 {
+            color: #ff0000;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0px #ffffff;
+            border-bottom: 2px dashed #ff0000;
+            padding-bottom: 10px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* 💾 Main Content Terminal Box */
+        .content-box {
+            background-color: rgba(0, 0, 0, 0.85);
+            border: 4px double #ff0000;
+            max-width: 800px;
+            width: 100%;
+            padding: 30px;
+            box-sizing: border-box;
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .content-box h2 {
+            color: #ffffff;
+            font-size: 1.3rem;
+            border-bottom: 1px solid #ff0000;
+            padding-bottom: 5px;
+            margin-top: 0;
+            text-transform: uppercase;
+        }
+
+        .content-box p {
+            line-height: 1.6;
+            font-size: 1rem;
+            color: #cccccc;
+        }
+
+        /* ↩️ Retro Back Button Navigation */
+        .back-btn {
+            display: inline-block;
+            background-color: #111111;
+            color: #ff0000;
+            border: 2px solid #ff0000;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.15s ease-in-out;
+        }
+
+        .back-btn:hover {
+            background-color: #ff0000;
+            color: #000000;
+            box-shadow: 4px 4px 0px #ffffff;
+            transform: translate(-2px, -2px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🎥 Video loop matched to your background asset -->
+    <video class="video-background" autoplay loop muted playsinline>
+        <source src="Hwj 27 10 25.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <div class="video-overlay"></div>
+
+    <h1>[ SYSTEM_LOG // 01 ]</h1>
+
+    <!-- 💾 Main data panel where your text goes -->
+    <div class="content-box">
+        <h2>> INITIALIZING_DATA_STREAM...</h2>
+        <p>This is where your subpage content goes. The template matches your main page exactly with the semi-transparent dark workspace, double red borders, and your custom background video loop.</p>
+        <p>You can duplicate this template file for all six subpages—just name them <code>page2.html</code>, <code>page3.html</code>, etc., to match the grid links on your main page.</p>
+    </div>
+
+    <!-- ↩️ Returns user back to your main grid index -->
+    <a href="index.html" class="back-btn">&lt;&lt; RETURN_TO_MAIN</a>
+
+</body>
+</html>
