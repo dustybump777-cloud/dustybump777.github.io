@@ -18,28 +18,18 @@
             box-sizing: border-box;
         }
 
-        .video-background-container {
+        /* 🎥 Local HTML5 Video Background */
+        .video-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
-            pointer-events: none;
-            overflow: hidden;
+            object-fit: cover; /* Stretches the video cleanly to fill the screen */
+            z-index: -2; /* Keeps video behind everything */
         }
 
-        .video-background-container iframe {
-            width: 100vw;
-            height: 56.25vw;
-            min-height: 100vh;
-            min-width: 177.77vh;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
+        /* Y2K Scanline Overlay */
         .video-overlay {
             position: fixed;
             top: 0;
@@ -127,37 +117,40 @@
 </head>
 <body>
 
-    <div class="video-background-container">
-        <iframe src="https://youtube.com" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-    </div>
+    <!-- 🎥 Change "background.mp4" below to match your exact file name on GitHub -->
+    <video class="video-background" autoplay loop muted playsinline>
+        <source src="Hwj 27 10 25.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
 
+    <!-- Retro CRT Monitor Scanline Layer -->
     <div class="video-overlay"></div>
 
     <h1>[ ENTER_THE_SYSTEM ]</h1>
 
     <div class="grid-container">
         <a href="page1.html" class="grid-box">
-            <img src="https://picsum.photos" alt="Subpage 01">
+            <img src="https://unsplash.com" alt="Subpage 01">
             <span>// SUBPAGE_01 //</span>
         </a>
         <a href="page2.html" class="grid-box">
-            <img src="https://picsum.photos" alt="Subpage 02">
+            <img src="https://unsplash.com" alt="Subpage 02">
             <span>// SUBPAGE_02 //</span>
         </a>
         <a href="page3.html" class="grid-box">
-            <img src="https://picsum.photos" alt="Subpage 03">
+            <img src="https://unsplash.com" alt="Subpage 03">
             <span>// SUBPAGE_03 //</span>
         </a>
         <a href="page4.html" class="grid-box">
-            <img src="https://picsum.photos" alt="Subpage 04">
+            <img src="https://unsplash.com" alt="Subpage 04">
             <span>// SUBPAGE_04 //</span>
         </a>
         <a href="page5.html" class="grid-box">
-            <img src="https://picsum.photos" alt="Subpage 05">
+            <img src="https://unsplash.com" alt="Subpage 05">
             <span>// SUBPAGE_05 //</span>
         </a>
         <a href="page6.html" class="grid-box">
-            <img src="https://picsum.photos" alt="Subpage 06">
+            <img src="https://unsplash.com" alt="Subpage 06">
             <span>// SUBPAGE_06 //</span>
         </a>
     </div>
