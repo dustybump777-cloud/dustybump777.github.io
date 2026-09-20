@@ -18,7 +18,7 @@
             box-sizing: border-box;
         }
 
-        /* Video Background */
+        /* Video Background Base */
         .video-background {
             position: fixed;
             top: 0;
@@ -27,6 +27,14 @@
             height: 100%;
             object-fit: cover;
             z-index: -2;
+            opacity: 0; /* Hidden by default */
+            transition: opacity 1.5s ease-in-out; /* Smooth fade duration */
+        }
+        
+        /* Active video layers on top and fades in */
+        .video-background.active {
+            opacity: 1;
+            z-index: -1; /* Stack above hidden video, but behind overlay */
         }
 
         /* Y2K Scanline Overlay */
@@ -357,9 +365,9 @@
 </head>
 <body>
 
-    <!-- Video Background -->
-    <video class="video-background" id="bgVideo" autoplay loop muted playsinline>
-    </video>
+    !-- Two overlapping video elements for seamless crossfading -->
+    <video class="video-background active" id="bgVideo1" autoplay muted playsinline></video>
+    <video class="video-background" id="bgVideo2" autoplay muted playsinline></video>
     
     
     
@@ -443,38 +451,48 @@
     </div>
 
 <script>
-    // PLACE AT THE TOP OF YOUR SCRIPT TAG:
-    const bgVideos = [
-        "Normview.0.mp4",
-        "Fractalview1.mp4",
-        "video3.mp4"
-    ];
+    // Array of video files
+const bgVideos = [
+    "Normview.0.mp4",
+    "video2.mp4",
+    "video3.mp4"
+];
 
-    let currentVideoIndex = 0;
-    const bgVideoElement = document.getElementById('bgVideo');
+let currentVideoIndex = 0;
+let activeVideo = document.getElementById('bgVideo1');
+let inactiveVideo = document.getElementById('bgVideo2');
 
-    function loadBackgroundVideo(index) {
-        bgVideoElement.classList.add('fade-out');
+function initVideoBackground() {
+    activeVideo.src = bgVideos[currentVideoIndex];
+    activeVideo.play();
 
-        setTimeout(() => {
-            bgVideoElement.src = bgVideos[index];
-            bgVideoElement.load();
-            bgVideoElement.play().then(() => {
-                bgVideoElement.classList.remove('fade-out');
-            }).catch(err => {
-                console.error("Video error:", err);
-                bgVideoElement.classList.remove('fade-out');
-            });
-        }, 1000);
-    }
+    // Listen for when the video finishes to trigger the crossfade
+    activeVideo.onended = cycleVideo;
+    inactiveVideo.onended = cycleVideo;
+}
 
-    bgVideoElement.addEventListener('ended', () => {
-        currentVideoIndex = (currentVideoIndex + 1) % bgVideos.length;
-        loadBackgroundVideo(currentVideoIndex);
-    });
+function cycleVideo() {
+    // Advance to next index
+    currentVideoIndex = (currentVideoIndex + 1) % bgVideos.length;
 
-    // Start initial video
-    loadBackgroundVideo(0);
+    // Load next video into the hidden player
+    inactiveVideo.src = bgVideos[currentVideoIndex];
+    inactiveVideo.load();
+
+    inactiveVideo.play().then(() => {
+        // Crossfade: make inactive active, and active inactive
+        inactiveVideo.classList.add('active');
+        activeVideo.classList.remove('active');
+
+        // Swap variable references for the next cycle
+        const temp = activeVideo;
+        activeVideo = inactiveVideo;
+        inactiveVideo = temp;
+    }).catch(err => console.error("Video load error:", err));
+}
+
+// Start video system
+initVideoBackground();
 
     
     // 1. ADD YOUR TRACKS HERE (Update 'src' with your actual file names/paths)
