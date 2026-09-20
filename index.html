@@ -268,6 +268,69 @@
             border: 1px solid #000;
             cursor: pointer;
         }
+
+        /* --- Y2K Playlist Window --- */
+        .playlist-box {
+            background-color: #050000;
+            border: 2px inset #333;
+            padding: 4px;
+            margin-top: 6px;
+            box-shadow: inset 0 0 4px #ff0000;
+        }
+
+        .playlist-header {
+            font-size: 9px;
+            color: #880000;
+            text-align: center;
+            border-bottom: 1px dashed #440000;
+            padding-bottom: 2px;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+
+        .playlist-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            max-height: 80px;
+            overflow-y: auto;
+            font-size: 10px;
+        }
+
+        /* Scrollbar Styling */
+        .playlist-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .playlist-list::-webkit-scrollbar-track {
+            background: #111;
+        }
+
+        .playlist-list::-webkit-scrollbar-thumb {
+            background: #ff0000;
+        }
+
+        .playlist-item {
+            padding: 3px 4px;
+            cursor: pointer;
+            color: #880000;
+            display: flex;
+            justify-content: space-between;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .playlist-item:hover {
+            background-color: #220000;
+            color: #ff5555;
+        }
+
+        .playlist-item.active {
+            background-color: #ff0000;
+            color: #000000;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -291,7 +354,7 @@
       <!-- Display Panel -->
       <div class="player-display">
         <div class="marquee-container">
-          <span class="track-text" id="trackTitle">2 sick horses HWJ.mp3</span>
+          <span class="track-text" id="trackTitle">SELECT A TRACK</span>
         </div>
         <div class="display-stats">
           <span class="led-time" id="timeDisplay">00:00</span>
@@ -313,8 +376,14 @@
         <button class="player-btn" onclick="nextTrack()">&#9654;&#9654;</button>
       </div>
 
+      <!-- Y2K Playlist Drawer -->
+      <div class="playlist-box">
+        <div class="playlist-header">=== PLAYLIST ===</div>
+        <ul class="playlist-list" id="playlist"></ul>
+      </div>
+
       <!-- Hidden Native Audio Element -->
-      <audio id="audioSource" src="2 sick horses HWJ.mp3"></audio>
+      <audio id="audioSource"></audio>
     </div>
     
     <!-- Retro CRT Monitor Scanline Layer -->
@@ -350,26 +419,66 @@
     </div>
 
 <script>
-    // 1. Single declaration for element variables
+    // 1. ADD YOUR TRACKS HERE (Update 'src' with your actual file names/paths)
+    const tracks = [
+        { title: "01. 2 sick horses HWJ.mp3", src: "2 sick horses HWJ.mp3" },
+        { title: "02. Cyberpunk Ambient.mp3", src: "track2.mp3" },
+        { title: "03. Y2K Matrix Beat.mp3", src: "track3.mp3" }
+    ];
+
+    let currentTrackIndex = 0;
+
+    // Elements
     const audio = document.getElementById('audioSource');
     const volumeSlider = document.getElementById('volume-slider');
     const playBtn = document.getElementById('playBtn');
     const timeDisplay = document.getElementById('timeDisplay');
+    const trackTitleDisplay = document.getElementById('trackTitle');
+    const playlistUI = document.getElementById('playlist');
 
-    // 2. Set initial volume
+    // Set initial volume
     audio.volume = volumeSlider.value;
 
-    // 3. Volume slider event listener
+    // Volume Slider Event
     volumeSlider.addEventListener('input', (e) => {
         audio.volume = e.target.value;
     });
 
-    // 4. Play / Pause toggle
+    // Populate Playlist UI
+    function initPlaylist() {
+        playlistUI.innerHTML = '';
+        tracks.forEach((track, index) => {
+            const li = document.createElement('li');
+            li.className = `playlist-item ${index === currentTrackIndex ? 'active' : ''}`;
+            li.textContent = track.title;
+            
+            li.addEventListener('click', () => {
+                loadTrack(index);
+                audio.play();
+                playBtn.innerHTML = "&#10074;&#10074;";
+            });
+            
+            playlistUI.appendChild(li);
+        });
+    }
+
+    // Load Track by Index
+    function loadTrack(index) {
+        currentTrackIndex = index;
+        audio.src = tracks[index].src;
+        trackTitleDisplay.textContent = tracks[index].title.toUpperCase();
+
+        // Highlight Active Row in Playlist
+        const items = playlistUI.querySelectorAll('.playlist-item');
+        items.forEach((item, i) => {
+            item.classList.toggle('active', i === currentTrackIndex);
+        });
+    }
+
+    // Play / Pause Toggle
     function togglePlay() {
         if (audio.paused) {
-            audio.play().catch(err => {
-                console.error("Audio playback error:", err);
-            });
+            audio.play().catch(err => console.error("Audio error:", err));
             playBtn.innerHTML = "&#10074;&#10074;"; // Pause symbol
         } else {
             audio.pause();
@@ -377,27 +486,44 @@
         }
     }
 
-    // 5. Stop track
+    // Stop Track
     function stopTrack() {
         audio.pause();
         audio.currentTime = 0;
         playBtn.innerHTML = "&#9654;";
     }
 
-    // 6. Update LED time display
+    // Previous Track
+    function prevTrack() {
+        currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+        loadTrack(currentTrackIndex);
+        audio.play();
+        playBtn.innerHTML = "&#10074;&#10074;";
+    }
+
+    // Next Track
+    function nextTrack() {
+        currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+        loadTrack(currentTrackIndex);
+        audio.play();
+        playBtn.innerHTML = "&#10074;&#10074;";
+    }
+
+    // Auto-play Next Song when Current Ends
+    audio.addEventListener('ended', () => {
+        nextTrack();
+    });
+
+    // Update LED Time
     audio.addEventListener('timeupdate', () => {
         const mins = Math.floor(audio.currentTime / 60).toString().padStart(2, '0');
         const secs = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
         timeDisplay.textContent = `${mins}:${secs}`;
     });
 
-    function prevTrack() {
-        audio.currentTime = 0;
-    }
-
-    function nextTrack() {
-        audio.currentTime = 0;
-    }
+    // Initialize Player
+    initPlaylist();
+    loadTrack(0);
 </script>
 
 </body>
