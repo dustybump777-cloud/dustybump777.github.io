@@ -331,14 +331,34 @@
             color: #000000;
             font-weight: bold;
         }
+
+        <head>
+    <style>
+        /* ADD THIS TO YOUR CSS: Smooth fade transition */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            transition: opacity 1s ease-in-out; /* Handles the crossfade */
+            opacity: 1;
+        }
+
+        /* Fades video out during source switch */
+        .video-background.fade-out {
+            opacity: 0;
+        }
+    </style>
+</head>
     </style>
 </head>
 <body>
 
     <!-- Video Background -->
-    <video class="video-background" autoplay loop muted playsinline>
-        <source src="Normview.0.mp4" type="video/mp4">
-        Your browser does not support HTML5 video.
+    <video class="video-background" id="bgVideo" autoplay loop muted playsinline>
     </video>
     
     
@@ -423,6 +443,43 @@
     </div>
 
 <script>
+    <script>
+    // PLACE AT THE TOP OF YOUR SCRIPT TAG:
+    const bgVideos = [
+        "Normview.0.mp4",
+        "Fractalview1.mp4",
+        "video3.mp4"
+    ];
+
+    let currentVideoIndex = 0;
+    const bgVideoElement = document.getElementById('bgVideo');
+
+    function loadBackgroundVideo(index) {
+        bgVideoElement.classList.add('fade-out');
+
+        setTimeout(() => {
+            bgVideoElement.src = bgVideos[index];
+            bgVideoElement.load();
+            bgVideoElement.play().then(() => {
+                bgVideoElement.classList.remove('fade-out');
+            }).catch(err => {
+                console.error("Video error:", err);
+                bgVideoElement.classList.remove('fade-out');
+            });
+        }, 1000);
+    }
+
+    bgVideoElement.addEventListener('ended', () => {
+        currentVideoIndex = (currentVideoIndex + 1) % bgVideos.length;
+        loadBackgroundVideo(currentVideoIndex);
+    });
+
+    // Start initial video
+    loadBackgroundVideo(0);
+
+    // ... (Your audio player script follows here)
+</script>
+    
     // 1. ADD YOUR TRACKS HERE (Update 'src' with your actual file names/paths)
     const tracks = [
         { title: "2 sick horses HWJ.mp3", src: "2 sick horses HWJ.mp3" },
