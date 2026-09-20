@@ -113,6 +113,116 @@
                 grid-template-columns: 1fr;
             }
         }
+        /* Early 2000s Media Player Styles */
+.media-player-2000s {
+  width: 320px;
+  background: linear-gradient(180deg, #2b2b2b 0%, #111111 50%, #000000 100%);
+  border: 2px solid #ff0000;
+  border-radius: 4px;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.4), inset 0 0 4px #555;
+  padding: 6px;
+  font-family: 'Courier New', Courier, monospace;
+  color: #ff0000;
+  user-select: none;
+}
+
+.player-titlebar {
+  background: linear-gradient(90deg, #800000 0%, #000000 100%);
+  border: 1px solid #ff0000;
+  padding: 3px 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.player-title {
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px #ff0000;
+}
+
+.win-btn {
+  color: #ff0000;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 4px;
+  padding: 0 3px;
+  border: 1px solid #ff0000;
+  background: #000;
+}
+
+.player-display {
+  background: #050505;
+  border: 2px inset #333;
+  padding: 6px;
+  margin-bottom: 8px;
+  box-shadow: inset 0 0 8px rgba(255, 0, 0, 0.6);
+}
+
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  background: #000;
+  border: 1px solid #300;
+  padding: 2px;
+  margin-bottom: 4px;
+}
+
+.track-text {
+  display: inline-block;
+  font-size: 11px;
+  color: #ff0000;
+  text-shadow: 0 0 5px #ff0000;
+}
+
+.display-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.led-time {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff0000;
+  text-shadow: 0 0 8px #ff0000;
+}
+
+.kbps-badge {
+  font-size: 9px;
+  background: #200;
+  color: #ff3333;
+  padding: 1px 4px;
+  border: 1px solid #ff0000;
+}
+
+.player-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.player-btn {
+  flex: 1;
+  background: linear-gradient(180deg, #444 0%, #111 100%);
+  color: #ff0000;
+  border: 1px solid #ff0000;
+  padding: 6px 0;
+  font-size: 12px;
+  cursor: pointer;
+  box-shadow: 1px 1px 0px #800000;
+  text-shadow: 0 0 3px #ff0000;
+}
+
+.player-btn:active {
+  background: #ff0000;
+  color: #000000;
+  box-shadow: inset 1px 1px 2px #000;
+}
     </style>
 </head>
 <body>
@@ -187,6 +297,42 @@
             <span>// SUBPAGE_06 //</span>
         </a>
     </div>
+    <script>
+  const audio = document.getElementById('audioSource');
+  const playBtn = document.getElementById('playBtn');
+  const timeDisplay = document.getElementById('timeDisplay');
+
+  function togglePlay() {
+    if (audio.paused) {
+      audio.play();
+      playBtn.innerHTML = "&#10074;&#10074;"; // Pause symbol
+    } else {
+      audio.pause();
+      playBtn.innerHTML = "&#9654;"; // Play symbol
+    }
+  }
+
+  function stopTrack() {
+    audio.pause();
+    audio.currentTime = 0;
+    playBtn.innerHTML = "&#9654;";
+  }
+
+  // Update LED time display
+  audio.addEventListener('timeupdate', () => {
+    const mins = Math.floor(audio.currentTime / 60).toString().padStart(2, '0');
+    const secs = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
+    timeDisplay.textContent = `${mins}:${secs}`;
+  });
+
+  function prevTrack() {
+    audio.currentTime = 0; // Resets track
+  }
+
+  function nextTrack() {
+    audio.currentTime = 0;
+  }
+</script>
 
 </body>
 </html>
