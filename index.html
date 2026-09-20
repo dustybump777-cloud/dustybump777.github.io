@@ -122,7 +122,40 @@
         <source src="Normview.0.mp4" type="video/mp4">
         Your browser does not support HTML5 video.
     </video>
+    
+    <div class="media-player-2000s">
+  <!-- Title Bar -->
+  <div class="player-titlebar">
+    <span class="player-title">WIN-PLAYER v1.0 [RED_SKIN.wsz]</span>
+    <div class="titlebar-controls">
+      <span class="win-btn">_</span>
+      <span class="win-btn">X</span>
+    </div>
+  </div>
 
+  <!-- Display Panel -->
+  <div class="player-display">
+    <div class="marquee-container">
+      <span class="track-text" id="trackTitle">TRACK 01: MY_FAVORITE_SONG.MP3 - 320KBPS</span>
+    </div>
+    <div class="display-stats">
+      <span class="led-time" id="timeDisplay">00:00</span>
+      <span class="kbps-badge">STEREO</span>
+    </div>
+  </div>
+
+  <!-- Control Buttons -->
+  <div class="player-controls">
+    <button class="player-btn" onclick="prevTrack()">&#9664;&#9664;</button>
+    <button class="player-btn btn-play" id="playBtn" onclick="togglePlay()">&#9654;</button>
+    <button class="player-btn" onclick="stopTrack()">&#9632;</button>
+    <button class="player-btn" onclick="nextTrack()">&#9654;&#9654;</button>
+  </div>
+
+  <!-- Hidden Native Audio Element -->
+  <audio id="audioSource" src="your-audio-file.mp3"></audio>
+</div>
+    
     <!-- Retro CRT Monitor Scanline Layer -->
     <div class="video-overlay"></div>
 
