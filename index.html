@@ -343,6 +343,16 @@ input[type="range"]#volume-slider::-moz-range-thumb {
         </a>
     </div>
     <script>
+  const audio = document.getElementById('audio-element');
+    const volumeSlider = document.getElementById('volume-slider');
+
+    // Set initial volume
+    audio.volume = volumeSlider.value;
+
+    // Update volume on slider drag
+    volumeSlider.addEventListener('input', (e) => {
+      audio.volume = e.target.value;
+    });
   const audio = document.getElementById('audioSource');
   const playBtn = document.getElementById('playBtn');
   const timeDisplay = document.getElementById('timeDisplay');
@@ -377,17 +387,6 @@ input[type="range"]#volume-slider::-moz-range-thumb {
   function nextTrack() {
     audio.currentTime = 0;
   }
-  // volume slider script
-const audio = document.getElementById('audio-element');
-const volumeSlider = document.getElementById('volume-slider');
-
-// Set initial volume
-audio.volume = volumeSlider.value;
-
-// Update volume on slider drag
-volumeSlider.addEventListener('input', (e) => {
-  audio.volume = e.target.value;
-});
 </script>
 
 </body>
