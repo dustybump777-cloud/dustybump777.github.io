@@ -341,50 +341,7 @@
         Your browser does not support HTML5 video.
     </video>
     
-    <div class="media-player-2000s">
-      <!-- Title Bar -->
-      <div class="player-titlebar">
-        <span class="player-title">WIN-PLAYER v1.0 [RED_SKIN.wsz]</span>
-        <div class="titlebar-controls">
-          <span class="win-btn">_</span>
-          <span class="win-btn">X</span>
-        </div>
-      </div>
-
-      <!-- Display Panel -->
-      <div class="player-display">
-        <div class="marquee-container">
-          <span class="track-text" id="trackTitle">SELECT A TRACK</span>
-        </div>
-        <div class="display-stats">
-          <span class="led-time" id="timeDisplay">00:00</span>
-          <span class="kbps-badge">STEREO</span>
-        </div>
-      </div>
-
-      <!-- Volume Slider -->
-      <div class="simple-vol">
-        <label for="volume-slider">VOL</label>
-        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.8">
-      </div>
-
-      <!-- Control Buttons -->
-      <div class="player-controls">
-        <button class="player-btn" onclick="prevTrack()">&#9664;&#9664;</button>
-        <button class="player-btn btn-play" id="playBtn" onclick="togglePlay()">&#9654;</button>
-        <button class="player-btn" onclick="stopTrack()">&#9632;</button>
-        <button class="player-btn" onclick="nextTrack()">&#9654;&#9654;</button>
-      </div>
-
-      <!-- Y2K Playlist Drawer -->
-      <div class="playlist-box">
-        <div class="playlist-header">=== PLAYLIST ===</div>
-        <ul class="playlist-list" id="playlist"></ul>
-      </div>
-
-      <!-- Hidden Native Audio Element -->
-      <audio id="audioSource"></audio>
-    </div>
+    
     
     <!-- Retro CRT Monitor Scanline Layer -->
     <div class="video-overlay"></div>
@@ -416,6 +373,53 @@
             <img src="" alt="Subpage 06">
             <span>// SUBPAGE_06 //</span>
         </a>
+    </div>
+
+    <div class="media-player-2000s">
+      <!-- Title Bar -->
+      <div class="player-titlebar">
+        <span class="player-title">WIN-PLAYER v1.0 [RED_SKIN.wsz]</span>
+        <div class="titlebar-controls">
+          <span class="win-btn">_</span>
+          <span class="win-btn">X</span>
+        </div>
+      </div>
+
+      <!-- Display Panel -->
+      <div class="player-display">
+        <div class="marquee-container">
+          <span class="track-text" id="trackTitle">SELECT A TRACK</span>
+        </div>
+        <div class="display-stats">
+          <span class="led-time" id="timeDisplay">00:00</span>
+          <span class="kbps-badge">STEREO</span>
+        </div>
+      </div>
+
+      
+
+      <!-- Control Buttons -->
+      <div class="player-controls">
+        <button class="player-btn" onclick="prevTrack()">&#9664;&#9664;</button>
+        <button class="player-btn btn-play" id="playBtn" onclick="togglePlay()">&#9654;</button>
+        <button class="player-btn" onclick="stopTrack()">&#9632;</button>
+        <button class="player-btn" onclick="nextTrack()">&#9654;&#9654;</button>
+      </div>
+
+      <!-- Volume Slider -->
+      <div class="simple-vol">
+        <label for="volume-slider">VOL</label>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.8">
+      </div>
+
+      <!-- Y2K Playlist Drawer -->
+      <div class="playlist-box">
+        <div class="playlist-header">=== PLAYLIST ===</div>
+        <ul class="playlist-list" id="playlist"></ul>
+      </div>
+
+      <!-- Hidden Native Audio Element -->
+      <audio id="audioSource"></audio>
     </div>
 
 <script>
